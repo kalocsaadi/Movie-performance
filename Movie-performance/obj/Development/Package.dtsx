@@ -1,0 +1,1983 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/22/2026 7:39:17 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="KALOCSAADI-PC"
+  DTS:CreatorName="kalocsaadi-PC\kalocsaadi"
+  DTS:DTSID="{E831E360-9F2D-48FA-B938-305CBE8ED342}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1010.2"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="63"
+  DTS:VersionGUID="{F6776351-77E1-4617-BE17-1DDAEB7FADC0}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[(localdb)\mssqllocaldb.Movie]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{57CF8D8A-07DE-4EE1-B81F-91735290D5B5}"
+      DTS:ObjectName="(localdb)\mssqllocaldb.Movie">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=(localdb)\mssqllocaldb;Initial Catalog=Movie;Integrated Security=True;Application Name=SSIS-Package-{57CF8D8A-07DE-4EE1-B81F-91735290D5B5}(localdb)\mssqllocaldb.Movie;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File IMDbMovies]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{5C16B9C9-06CD-46C4-8D05-06562D7FD906}"
+      DTS:ObjectName="Flat File IMDbMovies">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Package::MovieFilePath]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="2057"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="65001"
+          DTS:ConnectionString="D:\Egyetem\Üzleti intelligencia labor\Movie-performance\data\imdb_movies_2.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="names"
+              DTS:DTSID="{A698A5AE-F50C-4D63-A82E-BD827B001AE1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="133"
+              DTS:TextQualified="True"
+              DTS:ObjectName="date_x"
+              DTS:DTSID="{00AAD69B-1B53-4FB7-941C-76D18A56E94C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="14"
+              DTS:TextQualified="True"
+              DTS:ObjectName="score"
+              DTS:DTSID="{5576E74A-98CC-448D-B177-6F5A5D03DDF3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="8000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="genre"
+              DTS:DTSID="{BC3EEA4B-40A8-49D5-9B3C-528A49E17B81}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="8000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="overview"
+              DTS:DTSID="{3D8DB2A8-5857-459B-8059-364DAC5C9DF0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="8000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="crew"
+              DTS:DTSID="{09D0A537-2D9D-4FD2-8784-D43DBE4E6E04}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="orig_title"
+              DTS:DTSID="{953A6915-4A9D-48D1-AE48-E3644E3CF71C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="status"
+              DTS:DTSID="{68836A64-818B-49FE-A2AC-5817E7143BFF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="orig_lang"
+              DTS:DTSID="{52E1692E-736D-461E-9F5D-AFA551E4E3C4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="14"
+              DTS:TextQualified="True"
+              DTS:ObjectName="budget_x"
+              DTS:DTSID="{AC336BD1-989C-419B-9328-D1CB623DDAB0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="14"
+              DTS:TextQualified="True"
+              DTS:ObjectName="revenue"
+              DTS:DTSID="{3DB06AEF-FEC3-49B3-8284-F0F881C2F8E2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="country"
+              DTS:DTSID="{BE3BA6EA-367D-416D-B899-B9E396FA365E}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Watchtime]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{21402561-8FDF-4249-8A27-5CEF3CBD295D}"
+      DTS:ObjectName="Flat File Watchtime">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="2057"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="65001"
+          DTS:ConnectionString="D:\Egyetem\Üzleti intelligencia labor\NagyHF\data\flixpatrol.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Rank&quot;"
+              DTS:DTSID="{FFA5B070-00A9-4EF1-8C10-433C42D8DFE8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Title&quot;"
+              DTS:DTSID="{AF9C5BB0-7FE3-4002-AAAC-3D3F54A37B76}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Type&quot;"
+              DTS:DTSID="{CC3FBE11-C495-4F94-A0DD-1E22989A708E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Premiere&quot;"
+              DTS:DTSID="{1DBF20C2-EFAC-405C-AC23-89A3886989E1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Genre&quot;"
+              DTS:DTSID="{56892432-4AF0-4EB4-8093-E8BFAA0A8B9C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Watchtime&quot;"
+              DTS:DTSID="{CDF70AD5-E2E5-45CE-A402-C5C1AEDDAFB2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Watchtime in Million&quot;"
+              DTS:DTSID="{D4671353-55D5-4B08-9258-05084A28D3F6}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{E8CDCFC6-2845-486A-B7F6-F19B9207FD19}"
+      DTS:ObjectName="MovieFilePath">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">D:\Egyetem\Üzleti intelligencia labor\Movie-performance\data\imdb_movies_2.csv</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load data from CSV into RAW tables"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{4DC1B312-7A48-40DB-A349-5BB911DA0400}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load data from CSV into RAW tables"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="2057"
+              name="Read IMDb movies CSV using param"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File IMDbMovies]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File IMDbMovies]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[names]"
+                      codePage="65001"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].ExternalColumns[names]"
+                      length="255"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[names]"
+                      name="names"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[date_x]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].ExternalColumns[date_x]"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[date_x]"
+                      name="date_x"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[score]"
+                      dataType="decimal"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].ExternalColumns[score]"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[score]"
+                      name="score"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[genre]"
+                      codePage="65001"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].ExternalColumns[genre]"
+                      length="8000"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[genre]"
+                      name="genre"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[overview]"
+                      codePage="65001"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].ExternalColumns[overview]"
+                      length="8000"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[overview]"
+                      name="overview"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[crew]"
+                      codePage="65001"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].ExternalColumns[crew]"
+                      length="8000"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[crew]"
+                      name="crew"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[orig_title]"
+                      codePage="65001"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].ExternalColumns[orig_title]"
+                      length="255"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[orig_title]"
+                      name="orig_title"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[status]"
+                      codePage="65001"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].ExternalColumns[status]"
+                      length="100"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[status]"
+                      name="status"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[orig_lang]"
+                      codePage="65001"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].ExternalColumns[orig_lang]"
+                      length="100"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[orig_lang]"
+                      name="orig_lang"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[budget_x]"
+                      dataType="decimal"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].ExternalColumns[budget_x]"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[budget_x]"
+                      name="budget_x"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[revenue]"
+                      dataType="decimal"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].ExternalColumns[revenue]"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[revenue]"
+                      name="revenue"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[country]"
+                      codePage="65001"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].ExternalColumns[country]"
+                      length="10"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[country]"
+                      name="country"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].ExternalColumns[names]"
+                      codePage="65001"
+                      dataType="str"
+                      length="255"
+                      name="names" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].ExternalColumns[date_x]"
+                      dataType="dbDate"
+                      name="date_x" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].ExternalColumns[score]"
+                      dataType="decimal"
+                      name="score" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].ExternalColumns[genre]"
+                      codePage="65001"
+                      dataType="str"
+                      length="8000"
+                      name="genre" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].ExternalColumns[overview]"
+                      codePage="65001"
+                      dataType="str"
+                      length="8000"
+                      name="overview" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].ExternalColumns[crew]"
+                      codePage="65001"
+                      dataType="str"
+                      length="8000"
+                      name="crew" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].ExternalColumns[orig_title]"
+                      codePage="65001"
+                      dataType="str"
+                      length="255"
+                      name="orig_title" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].ExternalColumns[status]"
+                      codePage="65001"
+                      dataType="str"
+                      length="100"
+                      name="status" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].ExternalColumns[orig_lang]"
+                      codePage="65001"
+                      dataType="str"
+                      length="100"
+                      name="orig_lang" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].ExternalColumns[budget_x]"
+                      dataType="decimal"
+                      name="budget_x" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].ExternalColumns[revenue]"
+                      dataType="decimal"
+                      name="revenue" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].ExternalColumns[country]"
+                      codePage="65001"
+                      dataType="str"
+                      length="10"
+                      name="country" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load data from CSV into RAW tables\Read Watchtime"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="2057"
+              name="Read Watchtime"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load data from CSV into RAW tables\Read Watchtime.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Watchtime]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Watchtime]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].Columns[&quot;Rank&quot;]"
+                      codePage="65001"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].ExternalColumns[&quot;Rank&quot;]"
+                      length="10"
+                      lineageId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].Columns[&quot;Rank&quot;]"
+                      name="&quot;Rank&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].Columns[&quot;Title&quot;]"
+                      codePage="65001"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].ExternalColumns[&quot;Title&quot;]"
+                      length="255"
+                      lineageId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].Columns[&quot;Title&quot;]"
+                      name="&quot;Title&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].Columns[&quot;Type&quot;]"
+                      codePage="65001"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].ExternalColumns[&quot;Type&quot;]"
+                      length="50"
+                      lineageId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].Columns[&quot;Type&quot;]"
+                      name="&quot;Type&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].Columns[&quot;Premiere&quot;]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].ExternalColumns[&quot;Premiere&quot;]"
+                      lineageId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].Columns[&quot;Premiere&quot;]"
+                      name="&quot;Premiere&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].Columns[&quot;Genre&quot;]"
+                      codePage="65001"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].ExternalColumns[&quot;Genre&quot;]"
+                      length="100"
+                      lineageId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].Columns[&quot;Genre&quot;]"
+                      name="&quot;Genre&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].Columns[&quot;Watchtime&quot;]"
+                      codePage="65001"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].ExternalColumns[&quot;Watchtime&quot;]"
+                      length="50"
+                      lineageId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].Columns[&quot;Watchtime&quot;]"
+                      name="&quot;Watchtime&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].Columns[&quot;Watchtime in Million&quot;]"
+                      codePage="65001"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].ExternalColumns[&quot;Watchtime in Million&quot;]"
+                      length="50"
+                      lineageId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].Columns[&quot;Watchtime in Million&quot;]"
+                      name="&quot;Watchtime in Million&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].ExternalColumns[&quot;Rank&quot;]"
+                      codePage="65001"
+                      dataType="str"
+                      length="10"
+                      name="&quot;Rank&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].ExternalColumns[&quot;Title&quot;]"
+                      codePage="65001"
+                      dataType="str"
+                      length="255"
+                      name="&quot;Title&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].ExternalColumns[&quot;Type&quot;]"
+                      codePage="65001"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Type&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].ExternalColumns[&quot;Premiere&quot;]"
+                      dataType="i4"
+                      name="&quot;Premiere&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].ExternalColumns[&quot;Genre&quot;]"
+                      codePage="65001"
+                      dataType="str"
+                      length="100"
+                      name="&quot;Genre&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].ExternalColumns[&quot;Watchtime&quot;]"
+                      codePage="65001"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Watchtime&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].ExternalColumns[&quot;Watchtime in Million&quot;]"
+                      codePage="65001"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Watchtime in Million&quot;" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load data from CSV into RAW tables\Remove duplicates"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Remove duplicates"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Load data from CSV into RAW tables\Remove duplicates.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Remove duplicates.Inputs[Sort Input].Columns[names]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="names"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[names]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Remove duplicates.Inputs[Sort Input].Columns[date_x]"
+                      cachedDataType="dbDate"
+                      cachedName="date_x"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[date_x]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Remove duplicates.Inputs[Sort Input].Columns[score]"
+                      cachedDataType="decimal"
+                      cachedName="score"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[score]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Remove duplicates.Inputs[Sort Input].Columns[genre]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="8000"
+                      cachedName="genre"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[genre]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Remove duplicates.Inputs[Sort Input].Columns[overview]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="8000"
+                      cachedName="overview"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[overview]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Remove duplicates.Inputs[Sort Input].Columns[crew]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="8000"
+                      cachedName="crew"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[crew]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Remove duplicates.Inputs[Sort Input].Columns[orig_title]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="orig_title"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[orig_title]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Remove duplicates.Inputs[Sort Input].Columns[status]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="status"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[status]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Remove duplicates.Inputs[Sort Input].Columns[orig_lang]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="orig_lang"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[orig_lang]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Remove duplicates.Inputs[Sort Input].Columns[budget_x]"
+                      cachedDataType="decimal"
+                      cachedName="budget_x"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[budget_x]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Remove duplicates.Inputs[Sort Input].Columns[revenue]"
+                      cachedDataType="decimal"
+                      cachedName="revenue"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[revenue]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Remove duplicates.Inputs[Sort Input].Columns[country]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="country"
+                      lineageId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[country]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[names]"
+                      codePage="65001"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[names]"
+                      name="names"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[names]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[date_x]"
+                      dataType="dbDate"
+                      lineageId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[date_x]"
+                      name="date_x"
+                      sortKeyPosition="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[date_x]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[score]"
+                      dataType="decimal"
+                      lineageId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[score]"
+                      name="score">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[score]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[genre]"
+                      codePage="65001"
+                      dataType="str"
+                      length="8000"
+                      lineageId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[genre]"
+                      name="genre">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[genre]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[overview]"
+                      codePage="65001"
+                      dataType="str"
+                      length="8000"
+                      lineageId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[overview]"
+                      name="overview">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[overview]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[crew]"
+                      codePage="65001"
+                      dataType="str"
+                      length="8000"
+                      lineageId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[crew]"
+                      name="crew">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[crew]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[orig_title]"
+                      codePage="65001"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[orig_title]"
+                      name="orig_title">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[orig_title]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[status]"
+                      codePage="65001"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[status]"
+                      name="status">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[status]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[orig_lang]"
+                      codePage="65001"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[orig_lang]"
+                      name="orig_lang">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[orig_lang]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[budget_x]"
+                      dataType="decimal"
+                      lineageId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[budget_x]"
+                      name="budget_x">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[budget_x]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[revenue]"
+                      dataType="decimal"
+                      lineageId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[revenue]"
+                      name="revenue">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[revenue]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[country]"
+                      codePage="65001"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[country]"
+                      name="country">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output].Columns[country]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination."
+              name="Save to MoviesRaw"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The Destination database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."MoviesRaw"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows per batch. The default is 0 which uses the same size as SSIS internal buffer. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out. A value of 0 indicates infinite time-out. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether to use the SqlBulkCopy interface to improve the performance of bulk insert operations. Only certain providers support this interface."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[(localdb)\mssqllocaldb.Movie]"
+                  connectionManagerRefId="Package.ConnectionManagers[(localdb)\mssqllocaldb.Movie]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="ADO NET Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].Columns[names]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="names"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[Names]"
+                      lineageId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[names]" />
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].Columns[date_x]"
+                      cachedDataType="dbDate"
+                      cachedName="date_x"
+                      cachedSortKeyPosition="2"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[Date_X]"
+                      lineageId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[date_x]" />
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].Columns[score]"
+                      cachedDataType="decimal"
+                      cachedName="score"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[Score]"
+                      lineageId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[score]" />
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].Columns[genre]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="8000"
+                      cachedName="genre"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[Genre]"
+                      lineageId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[genre]" />
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].Columns[overview]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="8000"
+                      cachedName="overview"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[Overview]"
+                      lineageId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[overview]" />
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].Columns[crew]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="8000"
+                      cachedName="crew"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[Crew]"
+                      lineageId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[crew]" />
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].Columns[orig_title]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="orig_title"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[Orig_Title]"
+                      lineageId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[orig_title]" />
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].Columns[status]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="status"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[Status]"
+                      lineageId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[status]" />
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].Columns[orig_lang]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="orig_lang"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[Orig_Lang]"
+                      lineageId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[orig_lang]" />
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].Columns[budget_x]"
+                      cachedDataType="decimal"
+                      cachedName="budget_x"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[Budget_X]"
+                      lineageId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[budget_x]" />
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].Columns[revenue]"
+                      cachedDataType="decimal"
+                      cachedName="revenue"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[Revenue]"
+                      lineageId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[revenue]" />
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].Columns[country]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="country"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[Country]"
+                      lineageId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output].Columns[country]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[RawID]"
+                      dataType="i4"
+                      name="RawID" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[Names]"
+                      dataType="wstr"
+                      length="255"
+                      name="Names" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[Date_X]"
+                      dataType="dbTimeStamp"
+                      name="Date_X" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[Score]"
+                      dataType="numeric"
+                      name="Score"
+                      precision="4"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[Genre]"
+                      dataType="wstr"
+                      length="2147483647"
+                      name="Genre" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[Overview]"
+                      dataType="wstr"
+                      length="2147483647"
+                      name="Overview" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[Crew]"
+                      dataType="wstr"
+                      length="2147483647"
+                      name="Crew" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[Orig_Title]"
+                      dataType="wstr"
+                      length="255"
+                      name="Orig_Title" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[Status]"
+                      dataType="wstr"
+                      length="100"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[Orig_Lang]"
+                      dataType="wstr"
+                      length="100"
+                      name="Orig_Lang" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[Budget_X]"
+                      dataType="numeric"
+                      name="Budget_X"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[Revenue]"
+                      dataType="numeric"
+                      name="Revenue"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input].ExternalColumns[Country]"
+                      dataType="wstr"
+                      length="10"
+                      name="Country" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Outputs[ADO NET Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="ADO NET Destination Error Output"
+                  synchronousInputId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination."
+              name="Save to WatchtimeRaw"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The Destination database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."WatchtimeRaw"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows per batch. The default is 0 which uses the same size as SSIS internal buffer. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out. A value of 0 indicates infinite time-out. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether to use the SqlBulkCopy interface to improve the performance of bulk insert operations. Only certain providers support this interface."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[(localdb)\mssqllocaldb.Movie]"
+                  connectionManagerRefId="Package.ConnectionManagers[(localdb)\mssqllocaldb.Movie]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="ADO NET Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input].Columns[&quot;Rank&quot;]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="&quot;Rank&quot;"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input].ExternalColumns[Rank]"
+                      lineageId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].Columns[&quot;Rank&quot;]" />
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input].Columns[&quot;Title&quot;]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="&quot;Title&quot;"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input].ExternalColumns[Title]"
+                      lineageId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].Columns[&quot;Title&quot;]" />
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input].Columns[&quot;Type&quot;]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Type&quot;"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input].ExternalColumns[Type]"
+                      lineageId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].Columns[&quot;Type&quot;]" />
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input].Columns[&quot;Genre&quot;]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="&quot;Genre&quot;"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input].ExternalColumns[Genre]"
+                      lineageId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].Columns[&quot;Genre&quot;]" />
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input].Columns[&quot;Watchtime&quot;]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Watchtime&quot;"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input].ExternalColumns[Watchtime]"
+                      lineageId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].Columns[&quot;Watchtime&quot;]" />
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input].Columns[&quot;Watchtime in Million&quot;]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Watchtime in Million&quot;"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input].ExternalColumns[Watchtime_Million]"
+                      lineageId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].Columns[&quot;Watchtime in Million&quot;]" />
+                    <inputColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input].Columns[&quot;Premiere&quot;]"
+                      cachedDataType="i4"
+                      cachedName="&quot;Premiere&quot;"
+                      externalMetadataColumnId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input].ExternalColumns[Premiere]"
+                      lineageId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output].Columns[&quot;Premiere&quot;]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input].ExternalColumns[RawID]"
+                      dataType="i4"
+                      name="RawID" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input].ExternalColumns[Rank]"
+                      dataType="wstr"
+                      length="10"
+                      name="Rank" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input].ExternalColumns[Title]"
+                      dataType="wstr"
+                      length="255"
+                      name="Title" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input].ExternalColumns[Type]"
+                      dataType="wstr"
+                      length="50"
+                      name="Type" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input].ExternalColumns[Premiere]"
+                      dataType="i4"
+                      name="Premiere" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input].ExternalColumns[Genre]"
+                      dataType="wstr"
+                      length="100"
+                      name="Genre" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input].ExternalColumns[Watchtime]"
+                      dataType="wstr"
+                      length="50"
+                      name="Watchtime" />
+                    <externalMetadataColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input].ExternalColumns[Watchtime_Million]"
+                      dataType="wstr"
+                      length="50"
+                      name="Watchtime_Million" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Outputs[ADO NET Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="ADO NET Destination Error Output"
+                  synchronousInputId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load data from CSV into RAW tables.Paths[Flat File Source Output]"
+              endId="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw.Inputs[ADO NET Destination Input]"
+              name="Flat File Source Output"
+              startId="Package\Load data from CSV into RAW tables\Read Watchtime.Outputs[Flat File Source Output]" />
+            <path
+              refId="Package\Load data from CSV into RAW tables.Paths[Flat File Source Output1]"
+              endId="Package\Load data from CSV into RAW tables\Remove duplicates.Inputs[Sort Input]"
+              name="Flat File Source Output"
+              startId="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param.Outputs[Flat File Source Output]" />
+            <path
+              refId="Package\Load data from CSV into RAW tables.Paths[Sort Output]"
+              endId="Package\Load data from CSV into RAW tables\Save to MoviesRaw.Inputs[ADO NET Destination Input]"
+              name="Sort Output"
+              startId="Package\Load data from CSV into RAW tables\Remove duplicates.Outputs[Sort Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\truncate MoviesRaw"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{51E34C48-CA75-44BD-A4E2-660D26E25B50}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="truncate MoviesRaw"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{57CF8D8A-07DE-4EE1-B81F-91735290D5B5}"
+          SQLTask:SqlStatementSource="truncate table MoviesRaw;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\truncate WatchtimeRaw"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{a5433670-c4b6-4d00-822a-b5e5c3d2dd39}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="truncate WatchtimeRaw"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{57CF8D8A-07DE-4EE1-B81F-91735290D5B5}"
+          SQLTask:SqlStatementSource="truncate table WatchtimeRaw;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{BFC3187F-0D7F-4E26-80A7-5C8F3C90F7B3}"
+      DTS:From="Package\truncate MoviesRaw"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\truncate WatchtimeRaw" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{595AEEC1-F0CE-44A2-A008-BFD2E801AA02}"
+      DTS:From="Package\truncate WatchtimeRaw"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Load data from CSV into RAW tables" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="260,42"
+          Id="Package\Load data from CSV into RAW tables"
+          TopLeft="342,187" />
+        <NodeLayout
+          Size="179,42"
+          Id="Package\truncate MoviesRaw"
+          TopLeft="380,45" />
+        <NodeLayout
+          Size="196,42"
+          Id="Package\truncate WatchtimeRaw"
+          TopLeft="372,111" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="469.75,87">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,24"
+              Start="0,0"
+              End="0,16.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="471,153">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34"
+              Start="0,0"
+              End="0,26.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load data from CSV into RAW tables">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="193,42"
+          Id="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw"
+          TopLeft="844.475524475524,193.223776223777" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Load data from CSV into RAW tables\Save to MoviesRaw"
+          TopLeft="476.076923076923,279.358974358975" />
+        <NodeLayout
+          Size="160,42"
+          Id="Package\Load data from CSV into RAW tables\Read Watchtime"
+          TopLeft="860.398601398601,108.531468531468" />
+        <NodeLayout
+          Size="200,42"
+          Id="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param"
+          TopLeft="462,111" />
+        <EdgeLayout
+          Id="Package\Load data from CSV into RAW tables.Paths[Flat File Source Output]"
+          TopLeft="940.687062937063,150.531468531469">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42.6923076923081"
+              Start="0,0"
+              End="0,35.1923076923081">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.1923076923081" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Load data from CSV into RAW tables\Remove duplicates"
+          TopLeft="479.333333333333,191.666666666667" />
+        <EdgeLayout
+          Id="Package\Load data from CSV into RAW tables.Paths[Flat File Source Output1]"
+          TopLeft="563.916666666667,153">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.6666666666667"
+              Start="0,0"
+              End="0,31.1666666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.1666666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load data from CSV into RAW tables.Paths[Sort Output]"
+          TopLeft="564.955128205128,233.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45.692307692308"
+              Start="0,0"
+              End="0,38.192307692308">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.192307692308" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load data from CSV into RAW tables\Save to MoviesRaw">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
