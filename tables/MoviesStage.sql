@@ -15,5 +15,5 @@ CREATE TABLE "MoviesStage" (
     "Revenue" bigint,
     "Country" nvarchar(10),
     "Profit" bigint,
-    "ROI" int
+    "ROI"  decimal(18,2)
 )
