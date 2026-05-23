@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="63"
-  DTS:VersionGUID="{F6776351-77E1-4617-BE17-1DDAEB7FADC0}">
+  DTS:VersionBuild="135"
+  DTS:VersionGUID="{57140DF4-4398-44B6-9361-A2E12B76087E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1754,6 +1754,1814 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
+      DTS:refId="Package\Stage data tables"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{897F5B38-567D-4D1F-B7C5-2F1F0EEA29B3}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stage data tables"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Stage data tables\Calculate profit and ROI values"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Calculate profit and ROI values"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Stage data tables\Calculate profit and ROI values.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage data tables\Calculate profit and ROI values.Inputs[Derived Column Input].Columns[Budget_Bigint]"
+                      cachedDataType="i8"
+                      cachedName="Budget_Bigint"
+                      lineageId="Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Budget_Bigint]" />
+                    <inputColumn
+                      refId="Package\Stage data tables\Calculate profit and ROI values.Inputs[Derived Column Input].Columns[Revenue_Bigint]"
+                      cachedDataType="i8"
+                      cachedName="Revenue_Bigint"
+                      lineageId="Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Revenue_Bigint]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage data tables\Calculate profit and ROI values.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Stage data tables\Calculate profit and ROI values.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage data tables\Calculate profit and ROI values.Outputs[Derived Column Output].Columns[Profit]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage data tables\Calculate profit and ROI values.Outputs[Derived Column Output].Columns[Profit]"
+                      name="Profit"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(![ISNULL](#{Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Budget_Bigint]}) &amp;&amp; ![ISNULL](#{Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Revenue_Bigint]})) ? (#{Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Revenue_Bigint]} - #{Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Budget_Bigint]}) : 0</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(!ISNULL(Budget_Bigint) &amp;&amp; !ISNULL(Revenue_Bigint)) ? (Revenue_Bigint - Budget_Bigint) : 0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage data tables\Calculate profit and ROI values.Outputs[Derived Column Output].Columns[ROI]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage data tables\Calculate profit and ROI values.Outputs[Derived Column Output].Columns[ROI]"
+                      name="ROI"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(![ISNULL](#{Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Budget_Bigint]}) &amp;&amp; ![ISNULL](#{Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Revenue_Bigint]}) &amp;&amp; #{Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Budget_Bigint]} != 0) ? (((DT_R8)(#{Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Revenue_Bigint]} - #{Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Budget_Bigint]})) / (DT_R8)#{Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Budget_Bigint]}) : 0</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(!ISNULL(Budget_Bigint) &amp;&amp; !ISNULL(Revenue_Bigint) &amp;&amp; Budget_Bigint != 0) ? (((DT_R8)(Revenue_Bigint - Budget_Bigint)) / (DT_R8)Budget_Bigint) : 0</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage data tables\Calculate profit and ROI values.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Stage data tables\Calculate profit and ROI values.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage data tables\Calculate profit and ROI values.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Calculate profit and ROI values.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Calculate profit and ROI values.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Calculate profit and ROI values.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage data tables\Convert budget and revenue values to int"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Convert budget and revenue values to int"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Stage data tables\Convert budget and revenue values to int.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage data tables\Convert budget and revenue values to int.Inputs[Data Conversion Input].Columns[Budget_X]"
+                      cachedDataType="numeric"
+                      cachedName="Budget_X"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Budget_X]" />
+                    <inputColumn
+                      refId="Package\Stage data tables\Convert budget and revenue values to int.Inputs[Data Conversion Input].Columns[Revenue]"
+                      cachedDataType="numeric"
+                      cachedName="Revenue"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Revenue]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Stage data tables\Convert budget and revenue values to int.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Budget_Bigint]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Budget_Bigint]"
+                      name="Budget_Bigint"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Budget_X]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Revenue_Bigint]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Revenue_Bigint]"
+                      name="Revenue_Bigint"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Revenue]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Stage data tables\Convert budget and revenue values to int.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage data tables\Create numerical rank values"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Create numerical rank values"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Stage data tables\Create numerical rank values.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage data tables\Create numerical rank values.Inputs[Derived Column Input].Columns[Rank]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Rank"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Rank]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage data tables\Create numerical rank values.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Stage data tables\Create numerical rank values.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage data tables\Create numerical rank values.Outputs[Derived Column Output].Columns[Rank_num]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage data tables\Create numerical rank values.Outputs[Derived Column Output].Columns[Rank_num]"
+                      name="Rank_num"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)[REPLACE](#{Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Rank]},".","")</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)REPLACE(Rank,".","")</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage data tables\Create numerical rank values.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Stage data tables\Create numerical rank values.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage data tables\Create numerical rank values.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Create numerical rank values.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Create numerical rank values.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Create numerical rank values.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage data tables\Format watchtime fields"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Format watchtime fields"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Stage data tables\Format watchtime fields.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage data tables\Format watchtime fields.Inputs[Derived Column Input].Columns[Watchtime]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Watchtime"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Watchtime]" />
+                    <inputColumn
+                      refId="Package\Stage data tables\Format watchtime fields.Inputs[Derived Column Input].Columns[Watchtime_Million]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Watchtime_Million"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Watchtime_Million]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage data tables\Format watchtime fields.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Stage data tables\Format watchtime fields.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage data tables\Format watchtime fields.Outputs[Derived Column Output].Columns[Watchtime_Num]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage data tables\Format watchtime fields.Outputs[Derived Column Output].Columns[Watchtime_Num]"
+                      name="Watchtime_Num"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I8)[REPLACE](#{Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Watchtime]},",","")</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I8)REPLACE(Watchtime,",","")</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage data tables\Format watchtime fields.Outputs[Derived Column Output].Columns[Watchtime_Million_Num]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage data tables\Format watchtime fields.Outputs[Derived Column Output].Columns[Watchtime_Million_Num]"
+                      name="Watchtime_Million_Num"
+                      precision="10"
+                      scale="1"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_NUMERIC,10,1)[REPLACE](#{Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Watchtime_Million]},"M","")</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_NUMERIC,10,1)REPLACE(Watchtime_Million,"M","")</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage data tables\Format watchtime fields.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Stage data tables\Format watchtime fields.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage data tables\Format watchtime fields.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Format watchtime fields.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Format watchtime fields.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Format watchtime fields.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage data tables\Get release year from date"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Get release year from date"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Stage data tables\Get release year from date.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage data tables\Get release year from date.Inputs[Derived Column Input].Columns[Date_X]"
+                      cachedDataType="dbDate"
+                      cachedName="Date_X"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Date_X]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage data tables\Get release year from date.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Stage data tables\Get release year from date.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage data tables\Get release year from date.Outputs[Derived Column Output].Columns[Release_Year]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage data tables\Get release year from date.Outputs[Derived Column Output].Columns[Release_Year]"
+                      name="Release_Year"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)[YEAR](#{Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Date_X]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)YEAR(Date_X)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage data tables\Get release year from date.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Stage data tables\Get release year from date.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage data tables\Get release year from date.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Get release year from date.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Get release year from date.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Get release year from date.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage data tables\Normalize movie name"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Normalize movie name"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Stage data tables\Normalize movie name.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage data tables\Normalize movie name.Inputs[Derived Column Input].Columns[Names]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Names"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Names]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage data tables\Normalize movie name.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Stage data tables\Normalize movie name.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage data tables\Normalize movie name.Outputs[Derived Column Output].Columns[Normalized_Title]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Stage data tables\Normalize movie name.Outputs[Derived Column Output].Columns[Normalized_Title]"
+                      name="Normalized_Title"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[LOWER]([REPLACE]([REPLACE]([REPLACE]([TRIM](#{Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Names]}),":",""),"-",""),"'",""))</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">LOWER(REPLACE(REPLACE(REPLACE(TRIM(Names),":",""),"-",""),"'",""))</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage data tables\Normalize movie name.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Stage data tables\Normalize movie name.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage data tables\Normalize movie name.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Normalize movie name.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Normalize movie name.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Normalize movie name.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage data tables\Normalize movie title"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Normalize movie title"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Stage data tables\Normalize movie title.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage data tables\Normalize movie title.Inputs[Derived Column Input].Columns[Title]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Title"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Title]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage data tables\Normalize movie title.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Stage data tables\Normalize movie title.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage data tables\Normalize movie title.Outputs[Derived Column Output].Columns[Normalized_Title]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Stage data tables\Normalize movie title.Outputs[Derived Column Output].Columns[Normalized_Title]"
+                      name="Normalized_Title"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[LOWER]([REPLACE]([REPLACE]([REPLACE]([TRIM](#{Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Title]}),":",""),"-",""),"'",""))</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">LOWER(REPLACE(REPLACE(REPLACE(TRIM(Title),":",""),"-",""),"'",""))</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage data tables\Normalize movie title.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Stage data tables\Normalize movie title.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage data tables\Normalize movie title.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Normalize movie title.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Normalize movie title.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Normalize movie title.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage data tables\Read from MoviesRaw"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
+              name="Read from MoviesRaw"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement used by the component to extract data."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="The Source database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."MoviesRaw"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the mode to retrieve external column information"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">0</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage data tables\Read from MoviesRaw.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[(localdb)\mssqllocaldb.Movie]"
+                  connectionManagerRefId="Package.ConnectionManagers[(localdb)\mssqllocaldb.Movie]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output]"
+                  name="ADO NET Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[RawID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[RawID]"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[RawID]"
+                      name="RawID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Names]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[Names]"
+                      length="255"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Names]"
+                      name="Names"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Date_X]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[Date_X]"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Date_X]"
+                      name="Date_X"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Score]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[Score]"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Score]"
+                      name="Score"
+                      precision="4"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Genre]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[Genre]"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Genre]"
+                      name="Genre"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Overview]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[Overview]"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Overview]"
+                      name="Overview"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Crew]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[Crew]"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Crew]"
+                      name="Crew"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Orig_Title]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[Orig_Title]"
+                      length="255"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Orig_Title]"
+                      name="Orig_Title"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Status]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[Status]"
+                      length="100"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Status]"
+                      name="Status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Orig_Lang]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[Orig_Lang]"
+                      length="100"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Orig_Lang]"
+                      name="Orig_Lang"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Budget_X]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[Budget_X]"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Budget_X]"
+                      name="Budget_X"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Revenue]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[Revenue]"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Revenue]"
+                      name="Revenue"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Country]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[Country]"
+                      length="10"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Country]"
+                      name="Country"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[RawID]"
+                      dataType="i4"
+                      name="RawID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[Names]"
+                      dataType="wstr"
+                      length="255"
+                      name="Names" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[Date_X]"
+                      dataType="dbDate"
+                      name="Date_X" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[Score]"
+                      dataType="numeric"
+                      name="Score"
+                      precision="4"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[Genre]"
+                      dataType="nText"
+                      name="Genre" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[Overview]"
+                      dataType="nText"
+                      name="Overview" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[Crew]"
+                      dataType="nText"
+                      name="Crew" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[Orig_Title]"
+                      dataType="wstr"
+                      length="255"
+                      name="Orig_Title" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[Status]"
+                      dataType="wstr"
+                      length="100"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[Orig_Lang]"
+                      dataType="wstr"
+                      length="100"
+                      name="Orig_Lang" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[Budget_X]"
+                      dataType="numeric"
+                      name="Budget_X"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[Revenue]"
+                      dataType="numeric"
+                      name="Revenue"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].ExternalColumns[Country]"
+                      dataType="wstr"
+                      length="10"
+                      name="Country" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output]"
+                  isErrorOut="true"
+                  name="ADO NET Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[RawID]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[RawID]"
+                      name="RawID" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[Names]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[Names]"
+                      name="Names" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[Date_X]"
+                      dataType="dbDate"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[Date_X]"
+                      name="Date_X" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[Score]"
+                      dataType="numeric"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[Score]"
+                      name="Score"
+                      precision="4"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[Genre]"
+                      dataType="nText"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[Genre]"
+                      name="Genre" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[Overview]"
+                      dataType="nText"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[Overview]"
+                      name="Overview" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[Crew]"
+                      dataType="nText"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[Crew]"
+                      name="Crew" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[Orig_Title]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[Orig_Title]"
+                      name="Orig_Title" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[Status]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[Status]"
+                      name="Status" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[Orig_Lang]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[Orig_Lang]"
+                      name="Orig_Lang" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[Budget_X]"
+                      dataType="numeric"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[Budget_X]"
+                      name="Budget_X"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[Revenue]"
+                      dataType="numeric"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[Revenue]"
+                      name="Revenue"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[Country]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[Country]"
+                      name="Country" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage data tables\Read from WatchtimeRaw"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
+              name="Read from WatchtimeRaw"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement used by the component to extract data."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="The Source database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."WatchtimeRaw"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the mode to retrieve external column information"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">0</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage data tables\Read from WatchtimeRaw.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[(localdb)\mssqllocaldb.Movie]"
+                  connectionManagerRefId="Package.ConnectionManagers[(localdb)\mssqllocaldb.Movie]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output]"
+                  name="ADO NET Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[RawID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].ExternalColumns[RawID]"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[RawID]"
+                      name="RawID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Rank]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].ExternalColumns[Rank]"
+                      length="10"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Rank]"
+                      name="Rank"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Title]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].ExternalColumns[Title]"
+                      length="255"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Title]"
+                      name="Title"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Type]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].ExternalColumns[Type]"
+                      length="50"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Type]"
+                      name="Type"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Premiere]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].ExternalColumns[Premiere]"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Premiere]"
+                      name="Premiere"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Genre]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].ExternalColumns[Genre]"
+                      length="100"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Genre]"
+                      name="Genre"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Watchtime]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].ExternalColumns[Watchtime]"
+                      length="50"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Watchtime]"
+                      name="Watchtime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Watchtime_Million]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].ExternalColumns[Watchtime_Million]"
+                      length="50"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Watchtime_Million]"
+                      name="Watchtime_Million"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].ExternalColumns[RawID]"
+                      dataType="i4"
+                      name="RawID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].ExternalColumns[Rank]"
+                      dataType="wstr"
+                      length="10"
+                      name="Rank" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].ExternalColumns[Title]"
+                      dataType="wstr"
+                      length="255"
+                      name="Title" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].ExternalColumns[Type]"
+                      dataType="wstr"
+                      length="50"
+                      name="Type" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].ExternalColumns[Premiere]"
+                      dataType="i4"
+                      name="Premiere" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].ExternalColumns[Genre]"
+                      dataType="wstr"
+                      length="100"
+                      name="Genre" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].ExternalColumns[Watchtime]"
+                      dataType="wstr"
+                      length="50"
+                      name="Watchtime" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].ExternalColumns[Watchtime_Million]"
+                      dataType="wstr"
+                      length="50"
+                      name="Watchtime_Million" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Error Output]"
+                  isErrorOut="true"
+                  name="ADO NET Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Error Output].Columns[RawID]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Error Output].Columns[RawID]"
+                      name="RawID" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Error Output].Columns[Rank]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Error Output].Columns[Rank]"
+                      name="Rank" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Error Output].Columns[Title]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Error Output].Columns[Title]"
+                      name="Title" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Error Output].Columns[Type]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Error Output].Columns[Type]"
+                      name="Type" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Error Output].Columns[Premiere]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Error Output].Columns[Premiere]"
+                      name="Premiere" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Error Output].Columns[Genre]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Error Output].Columns[Genre]"
+                      name="Genre" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Error Output].Columns[Watchtime]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Error Output].Columns[Watchtime]"
+                      name="Watchtime" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Error Output].Columns[Watchtime_Million]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Error Output].Columns[Watchtime_Million]"
+                      name="Watchtime_Million" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage data tables\Remove TV shows"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Remove TV shows"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Stage data tables\Remove TV shows.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage data tables\Remove TV shows.Inputs[Conditional Split Input].Columns[Type]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Type"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Type]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage data tables\Remove TV shows.Outputs[MoviesOnly]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="MoviesOnly"
+                  synchronousInputId="Package\Stage data tables\Remove TV shows.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">[TRIM](#{Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Type]}) != "TV Show"</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">TRIM(Type) != "TV Show"</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage data tables\Remove TV shows.Outputs[Conditional Split Default Output]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Conditional Split Default Output"
+                  synchronousInputId="Package\Stage data tables\Remove TV shows.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage data tables\Remove TV shows.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\Stage data tables\Remove TV shows.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage data tables\Remove TV shows.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Remove TV shows.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Remove TV shows.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Remove TV shows.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage data tables\Save to MovieStage"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination."
+              name="Save to MovieStage"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The Destination database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."MoviesStage"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows per batch. The default is 0 which uses the same size as SSIS internal buffer. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out. A value of 0 indicates infinite time-out. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether to use the SqlBulkCopy interface to improve the performance of bulk insert operations. Only certain providers support this interface."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage data tables\Save to MovieStage.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[(localdb)\mssqllocaldb.Movie]"
+                  connectionManagerRefId="Package.ConnectionManagers[(localdb)\mssqllocaldb.Movie]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="ADO NET Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].Columns[Score]"
+                      cachedDataType="numeric"
+                      cachedName="Score"
+                      cachedPrecision="4"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Score]"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Score]" />
+                    <inputColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].Columns[Genre]"
+                      cachedDataType="nText"
+                      cachedName="Genre"
+                      externalMetadataColumnId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Genre]"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Genre]" />
+                    <inputColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].Columns[Overview]"
+                      cachedDataType="nText"
+                      cachedName="Overview"
+                      externalMetadataColumnId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Overview]"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Overview]" />
+                    <inputColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].Columns[Crew]"
+                      cachedDataType="nText"
+                      cachedName="Crew"
+                      externalMetadataColumnId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Crew]"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Crew]" />
+                    <inputColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].Columns[Orig_Title]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Orig_Title"
+                      externalMetadataColumnId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Orig_Title]"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Orig_Title]" />
+                    <inputColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].Columns[Status]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Status"
+                      externalMetadataColumnId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Status]"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Status]" />
+                    <inputColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].Columns[Orig_Lang]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Orig_Lang"
+                      externalMetadataColumnId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Orig_Lang]"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Orig_Lang]" />
+                    <inputColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].Columns[Country]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Country"
+                      externalMetadataColumnId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Country]"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Country]" />
+                    <inputColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].Columns[Normalized_Title]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Normalized_Title"
+                      externalMetadataColumnId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Normalized_Title]"
+                      lineageId="Package\Stage data tables\Normalize movie name.Outputs[Derived Column Output].Columns[Normalized_Title]" />
+                    <inputColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].Columns[Release_Year]"
+                      cachedDataType="i4"
+                      cachedName="Release_Year"
+                      externalMetadataColumnId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Release_Year]"
+                      lineageId="Package\Stage data tables\Get release year from date.Outputs[Derived Column Output].Columns[Release_Year]" />
+                    <inputColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].Columns[Profit]"
+                      cachedDataType="i8"
+                      cachedName="Profit"
+                      externalMetadataColumnId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Profit]"
+                      lineageId="Package\Stage data tables\Calculate profit and ROI values.Outputs[Derived Column Output].Columns[Profit]" />
+                    <inputColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].Columns[ROI]"
+                      cachedDataType="r8"
+                      cachedName="ROI"
+                      externalMetadataColumnId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[ROI]"
+                      lineageId="Package\Stage data tables\Calculate profit and ROI values.Outputs[Derived Column Output].Columns[ROI]" />
+                    <inputColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].Columns[Names]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Names"
+                      externalMetadataColumnId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Title]"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Names]" />
+                    <inputColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].Columns[Date_X]"
+                      cachedDataType="dbDate"
+                      cachedName="Date_X"
+                      externalMetadataColumnId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Date]"
+                      lineageId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output].Columns[Date_X]" />
+                    <inputColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].Columns[Budget_Bigint]"
+                      cachedDataType="i8"
+                      cachedName="Budget_Bigint"
+                      externalMetadataColumnId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Budget]"
+                      lineageId="Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Budget_Bigint]" />
+                    <inputColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].Columns[Revenue_Bigint]"
+                      cachedDataType="i8"
+                      cachedName="Revenue_Bigint"
+                      externalMetadataColumnId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Revenue]"
+                      lineageId="Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Revenue_Bigint]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[StageID]"
+                      dataType="i4"
+                      name="StageID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Title]"
+                      dataType="wstr"
+                      length="255"
+                      name="Title" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Normalized_Title]"
+                      dataType="wstr"
+                      length="255"
+                      name="Normalized_Title" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Date]"
+                      dataType="dbTimeStamp"
+                      name="Date" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Release_Year]"
+                      dataType="i4"
+                      name="Release_Year" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Score]"
+                      dataType="numeric"
+                      name="Score"
+                      precision="4"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Genre]"
+                      dataType="wstr"
+                      length="2147483647"
+                      name="Genre" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Overview]"
+                      dataType="wstr"
+                      length="2147483647"
+                      name="Overview" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Crew]"
+                      dataType="wstr"
+                      length="2147483647"
+                      name="Crew" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Orig_Title]"
+                      dataType="wstr"
+                      length="255"
+                      name="Orig_Title" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Status]"
+                      dataType="wstr"
+                      length="100"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Orig_Lang]"
+                      dataType="wstr"
+                      length="100"
+                      name="Orig_Lang" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Budget]"
+                      dataType="i8"
+                      name="Budget" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Revenue]"
+                      dataType="i8"
+                      name="Revenue" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Country]"
+                      dataType="wstr"
+                      length="10"
+                      name="Country" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[Profit]"
+                      dataType="i8"
+                      name="Profit" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input].ExternalColumns[ROI]"
+                      dataType="i4"
+                      name="ROI" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage data tables\Save to MovieStage.Outputs[ADO NET Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="ADO NET Destination Error Output"
+                  synchronousInputId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Save to MovieStage.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Save to MovieStage.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Save to MovieStage.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage data tables\Save to WatchtimeStage"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination."
+              name="Save to WatchtimeStage"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The Destination database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."WatchtimeStage"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows per batch. The default is 0 which uses the same size as SSIS internal buffer. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out. A value of 0 indicates infinite time-out. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether to use the SqlBulkCopy interface to improve the performance of bulk insert operations. Only certain providers support this interface."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage data tables\Save to WatchtimeStage.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[(localdb)\mssqllocaldb.Movie]"
+                  connectionManagerRefId="Package.ConnectionManagers[(localdb)\mssqllocaldb.Movie]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage data tables\Save to WatchtimeStage.Inputs[ADO NET Destination Input]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="ADO NET Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage data tables\Save to WatchtimeStage.Inputs[ADO NET Destination Input].Columns[Title]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Title"
+                      externalMetadataColumnId="Package\Stage data tables\Save to WatchtimeStage.Inputs[ADO NET Destination Input].ExternalColumns[Title]"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Title]" />
+                    <inputColumn
+                      refId="Package\Stage data tables\Save to WatchtimeStage.Inputs[ADO NET Destination Input].Columns[Premiere]"
+                      cachedDataType="i4"
+                      cachedName="Premiere"
+                      externalMetadataColumnId="Package\Stage data tables\Save to WatchtimeStage.Inputs[ADO NET Destination Input].ExternalColumns[Premiere]"
+                      lineageId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output].Columns[Premiere]" />
+                    <inputColumn
+                      refId="Package\Stage data tables\Save to WatchtimeStage.Inputs[ADO NET Destination Input].Columns[Normalized_Title]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Normalized_Title"
+                      externalMetadataColumnId="Package\Stage data tables\Save to WatchtimeStage.Inputs[ADO NET Destination Input].ExternalColumns[Normalized_Title]"
+                      lineageId="Package\Stage data tables\Normalize movie title.Outputs[Derived Column Output].Columns[Normalized_Title]" />
+                    <inputColumn
+                      refId="Package\Stage data tables\Save to WatchtimeStage.Inputs[ADO NET Destination Input].Columns[Rank_num]"
+                      cachedDataType="i4"
+                      cachedName="Rank_num"
+                      externalMetadataColumnId="Package\Stage data tables\Save to WatchtimeStage.Inputs[ADO NET Destination Input].ExternalColumns[Rank]"
+                      lineageId="Package\Stage data tables\Create numerical rank values.Outputs[Derived Column Output].Columns[Rank_num]" />
+                    <inputColumn
+                      refId="Package\Stage data tables\Save to WatchtimeStage.Inputs[ADO NET Destination Input].Columns[Watchtime_Million_Num]"
+                      cachedDataType="numeric"
+                      cachedName="Watchtime_Million_Num"
+                      cachedPrecision="10"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\Stage data tables\Save to WatchtimeStage.Inputs[ADO NET Destination Input].ExternalColumns[Watchtime_Million]"
+                      lineageId="Package\Stage data tables\Format watchtime fields.Outputs[Derived Column Output].Columns[Watchtime_Million_Num]" />
+                    <inputColumn
+                      refId="Package\Stage data tables\Save to WatchtimeStage.Inputs[ADO NET Destination Input].Columns[Watchtime_Num]"
+                      cachedDataType="i8"
+                      cachedName="Watchtime_Num"
+                      externalMetadataColumnId="Package\Stage data tables\Save to WatchtimeStage.Inputs[ADO NET Destination Input].ExternalColumns[Watchtime]"
+                      lineageId="Package\Stage data tables\Format watchtime fields.Outputs[Derived Column Output].Columns[Watchtime_Num]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Save to WatchtimeStage.Inputs[ADO NET Destination Input].ExternalColumns[StageID]"
+                      dataType="i4"
+                      name="StageID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Save to WatchtimeStage.Inputs[ADO NET Destination Input].ExternalColumns[Rank]"
+                      dataType="wstr"
+                      length="10"
+                      name="Rank" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Save to WatchtimeStage.Inputs[ADO NET Destination Input].ExternalColumns[Title]"
+                      dataType="wstr"
+                      length="255"
+                      name="Title" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Save to WatchtimeStage.Inputs[ADO NET Destination Input].ExternalColumns[Normalized_Title]"
+                      dataType="wstr"
+                      length="255"
+                      name="Normalized_Title" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Save to WatchtimeStage.Inputs[ADO NET Destination Input].ExternalColumns[Premiere]"
+                      dataType="i4"
+                      name="Premiere" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Save to WatchtimeStage.Inputs[ADO NET Destination Input].ExternalColumns[Watchtime]"
+                      dataType="i8"
+                      name="Watchtime" />
+                    <externalMetadataColumn
+                      refId="Package\Stage data tables\Save to WatchtimeStage.Inputs[ADO NET Destination Input].ExternalColumns[Watchtime_Million]"
+                      dataType="numeric"
+                      name="Watchtime_Million"
+                      precision="10"
+                      scale="1" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage data tables\Save to WatchtimeStage.Outputs[ADO NET Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="ADO NET Destination Error Output"
+                  synchronousInputId="Package\Stage data tables\Save to WatchtimeStage.Inputs[ADO NET Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage data tables\Save to WatchtimeStage.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Save to WatchtimeStage.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage data tables\Save to WatchtimeStage.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage data tables\Save to WatchtimeStage.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Stage data tables.Paths[ADO NET Source Output]"
+              endId="Package\Stage data tables\Remove TV shows.Inputs[Conditional Split Input]"
+              name="ADO NET Source Output"
+              startId="Package\Stage data tables\Read from WatchtimeRaw.Outputs[ADO NET Source Output]" />
+            <path
+              refId="Package\Stage data tables.Paths[ADO NET Source Output1]"
+              endId="Package\Stage data tables\Normalize movie name.Inputs[Derived Column Input]"
+              name="ADO NET Source Output"
+              startId="Package\Stage data tables\Read from MoviesRaw.Outputs[ADO NET Source Output]" />
+            <path
+              refId="Package\Stage data tables.Paths[Data Conversion Output]"
+              endId="Package\Stage data tables\Calculate profit and ROI values.Inputs[Derived Column Input]"
+              name="Data Conversion Output"
+              startId="Package\Stage data tables\Convert budget and revenue values to int.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Stage data tables.Paths[Derived Column Output]"
+              endId="Package\Stage data tables\Normalize movie title.Inputs[Derived Column Input]"
+              name="Derived Column Output"
+              startId="Package\Stage data tables\Create numerical rank values.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Stage data tables.Paths[Derived Column Output1]"
+              endId="Package\Stage data tables\Format watchtime fields.Inputs[Derived Column Input]"
+              name="Derived Column Output"
+              startId="Package\Stage data tables\Normalize movie title.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Stage data tables.Paths[Derived Column Output2]"
+              endId="Package\Stage data tables\Save to WatchtimeStage.Inputs[ADO NET Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Stage data tables\Format watchtime fields.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Stage data tables.Paths[Derived Column Output3]"
+              endId="Package\Stage data tables\Get release year from date.Inputs[Derived Column Input]"
+              name="Derived Column Output"
+              startId="Package\Stage data tables\Normalize movie name.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Stage data tables.Paths[Derived Column Output4]"
+              endId="Package\Stage data tables\Convert budget and revenue values to int.Inputs[Data Conversion Input]"
+              name="Derived Column Output"
+              startId="Package\Stage data tables\Get release year from date.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Stage data tables.Paths[Derived Column Output5]"
+              endId="Package\Stage data tables\Save to MovieStage.Inputs[ADO NET Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Stage data tables\Calculate profit and ROI values.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Stage data tables.Paths[MoviesOnly]"
+              endId="Package\Stage data tables\Create numerical rank values.Inputs[Derived Column Input]"
+              name="MoviesOnly"
+              startId="Package\Stage data tables\Remove TV shows.Outputs[MoviesOnly]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\truncate MoviesRaw"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
@@ -1771,6 +3579,23 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
+      DTS:refId="Package\truncate MoviesStage"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{16c7f112-96d6-4518-a1d1-29414eb27395}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="truncate MoviesStage"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{57CF8D8A-07DE-4EE1-B81F-91735290D5B5}"
+          SQLTask:SqlStatementSource="truncate table MoviesStage;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\truncate WatchtimeRaw"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
@@ -1785,6 +3610,23 @@
         <SQLTask:SqlTaskData
           SQLTask:Connection="{57CF8D8A-07DE-4EE1-B81F-91735290D5B5}"
           SQLTask:SqlStatementSource="truncate table WatchtimeRaw;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\truncate WatchtimeStage"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{7468b527-829f-4c78-8ed5-440ce7bc984c}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="truncate WatchtimeStage"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{57CF8D8A-07DE-4EE1-B81F-91735290D5B5}"
+          SQLTask:SqlStatementSource="truncate table WatchtimeStage;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -1805,6 +3647,30 @@
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
       DTS:To="Package\Load data from CSV into RAW tables" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{99B29C08-F50A-43A4-9E59-AF5E4348471A}"
+      DTS:From="Package\Load data from CSV into RAW tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\truncate MoviesStage" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{57624f10-49cf-4a21-b8b8-691267e713cb}"
+      DTS:From="Package\truncate MoviesStage"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\truncate WatchtimeStage" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{F54E6034-6A03-4A35-B14D-C087C3E8472C}"
+      DTS:From="Package\truncate WatchtimeStage"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Stage data tables" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -1817,7 +3683,7 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="260,42"
           Id="Package\Load data from CSV into RAW tables"
@@ -1874,6 +3740,84 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="164,42"
+          Id="Package\Stage data tables"
+          TopLeft="389,408" />
+        <NodeLayout
+          Size="185,42"
+          Id="Package\truncate MoviesStage"
+          TopLeft="383,261" />
+        <NodeLayout
+          Size="202,42"
+          Id="Package\truncate WatchtimeStage"
+          TopLeft="376,333" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="476.25,303">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30"
+              Start="0,0"
+              End="0,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="473.75,229">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32"
+              Start="0,0"
+              End="0,24.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="474,375">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33"
+              Start="0,0"
+              End="0,25.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -1883,6 +3827,14 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="160,42"
+          Id="Package\Load data from CSV into RAW tables\Read Watchtime"
+          TopLeft="860.398601398601,108.531468531468" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Load data from CSV into RAW tables\Remove duplicates"
+          TopLeft="479.333333333333,191.666666666667" />
+        <NodeLayout
           Size="193,42"
           Id="Package\Load data from CSV into RAW tables\Save to WatchtimeRaw"
           TopLeft="844.475524475524,193.223776223777" />
@@ -1891,53 +3843,23 @@
           Id="Package\Load data from CSV into RAW tables\Save to MoviesRaw"
           TopLeft="476.076923076923,279.358974358975" />
         <NodeLayout
-          Size="160,42"
-          Id="Package\Load data from CSV into RAW tables\Read Watchtime"
-          TopLeft="860.398601398601,108.531468531468" />
-        <NodeLayout
           Size="200,42"
           Id="Package\Load data from CSV into RAW tables\Read IMDb movies CSV using param"
           TopLeft="462,111" />
         <EdgeLayout
           Id="Package\Load data from CSV into RAW tables.Paths[Flat File Source Output]"
-          TopLeft="940.687062937063,150.531468531469">
+          TopLeft="940.687062937063,150.531468531468">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,42.6923076923081"
+              EndConnector="0,42.692307692309"
               Start="0,0"
-              End="0,35.1923076923081">
+              End="0,35.192307692309">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,35.1923076923081" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="173,42"
-          Id="Package\Load data from CSV into RAW tables\Remove duplicates"
-          TopLeft="479.333333333333,191.666666666667" />
-        <EdgeLayout
-          Id="Package\Load data from CSV into RAW tables.Paths[Flat File Source Output1]"
-          TopLeft="563.916666666667,153">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,38.6666666666667"
-              Start="0,0"
-              End="0,31.1666666666667">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,31.1666666666667" />
+                    End="0,35.192307692309" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1968,11 +3890,343 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load data from CSV into RAW tables.Paths[Flat File Source Output1]"
+          TopLeft="563.916666666667,153">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.6666666666667"
+              Start="0,0"
+              End="0,31.1666666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.1666666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
     design-time-name="Package\Load data from CSV into RAW tables\Save to MoviesRaw">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Stage data tables">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="207,42"
+          Id="Package\Stage data tables\Read from WatchtimeRaw"
+          TopLeft="1058,70" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Stage data tables\Remove TV shows"
+          TopLeft="1076,165" />
+        <EdgeLayout
+          Id="Package\Stage data tables.Paths[ADO NET Source Output]"
+          TopLeft="1161.5,112">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53"
+              Start="0,0"
+              End="0,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="222,42"
+          Id="Package\Stage data tables\Create numerical rank values"
+          TopLeft="1052,267" />
+        <EdgeLayout
+          Id="Package\Stage data tables.Paths[MoviesOnly]"
+          TopLeft="1162.25,207">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-25.64693359375,20.4453125,51.2938671875,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="181,42"
+          Id="Package\Stage data tables\Normalize movie title"
+          TopLeft="1071,357" />
+        <EdgeLayout
+          Id="Package\Stage data tables.Paths[Derived Column Output]"
+          TopLeft="1162.25,309">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48"
+              Start="0,0"
+              End="0,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="195,42"
+          Id="Package\Stage data tables\Format watchtime fields"
+          TopLeft="1070,449" />
+        <EdgeLayout
+          Id="Package\Stage data tables.Paths[Derived Column Output1]"
+          TopLeft="1164.5,399">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50"
+              Start="0,0"
+              End="0,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="200,42"
+          Id="Package\Stage data tables\Save to WatchtimeStage"
+          TopLeft="1070,546" />
+        <EdgeLayout
+          Id="Package\Stage data tables.Paths[Derived Column Output2]"
+          TopLeft="1168.75,491">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,55"
+              Start="0,0"
+              End="0,47.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="190,42"
+          Id="Package\Stage data tables\Read from MoviesRaw"
+          TopLeft="585,71" />
+        <NodeLayout
+          Size="191,42"
+          Id="Package\Stage data tables\Normalize movie name"
+          TopLeft="585,164" />
+        <EdgeLayout
+          Id="Package\Stage data tables.Paths[ADO NET Source Output1]"
+          TopLeft="680.25,113">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51"
+              Start="0,0"
+              End="0,43.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="209,42"
+          Id="Package\Stage data tables\Get release year from date"
+          TopLeft="575,247" />
+        <EdgeLayout
+          Id="Package\Stage data tables.Paths[Derived Column Output3]"
+          TopLeft="680,206">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41"
+              Start="0,0"
+              End="0,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="231,42"
+          Id="Package\Stage data tables\Calculate profit and ROI values"
+          TopLeft="562,418" />
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Stage data tables\Save to MovieStage"
+          TopLeft="588,506" />
+        <NodeLayout
+          Size="279,42"
+          Id="Package\Stage data tables\Convert budget and revenue values to int"
+          TopLeft="545,326" />
+        <EdgeLayout
+          Id="Package\Stage data tables.Paths[Derived Column Output4]"
+          TopLeft="682,289">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37"
+              Start="0,0"
+              End="0,29.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage data tables.Paths[Data Conversion Output]"
+          TopLeft="681,368">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50"
+              Start="0,0"
+              End="0,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage data tables.Paths[Derived Column Output5]"
+          TopLeft="677,460">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46"
+              Start="0,0"
+              End="0,38.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage data tables\Read from WatchtimeRaw">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage data tables\Save to WatchtimeStage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage data tables\Read from MoviesRaw">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage data tables\Save to MovieStage">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
