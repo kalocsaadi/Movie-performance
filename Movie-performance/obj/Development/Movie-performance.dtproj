@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">KALOCSAADI-PC</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAaS4G2bZlyk2vmxdS04ByDgAAAAACAAAAAAAQZgAAAAEAACAAAACOPNgtrsOomW9wC83Yy0SJjyzcEm8N4V38wAb7dWD/+gAAAAAOgAAAAAIAACAAAAC6CkhOMt9+/zjS4f6HDU1i9eKyPjMmEiiueTFHrJRqmJAAAAB3IOb9o0VPU7jEEzYD7xIQ5JG6e18pNF2nP+MU2oZBa48q7bRjJbFrf61yqxC3qxq65+jqWtvlPCGWCiFIwFQ9zF+A1SC7wuyRXHv5vhWCFms2gLgK1T9QOdcYzbrQkaPWNG8MrMvxLCn/biaIb7rPDaf3r8tkPHujuA5vC+UiB0YnQ0ydkKeSY0e84Svcf6NAAAAAHN41rcqM5VNAtPyjG0JDDalFEoHP1ll7XMPr4N1hXlHBxdcNZyBL87JifQS/raXIPYiEH/UI9LAFGKnh9mgxoA==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAaS4G2bZlyk2vmxdS04ByDgAAAAACAAAAAAAQZgAAAAEAACAAAAAJVxPsBSnKzSB/DI1xn4lQV89Vs+wZj8/z1ycKYu5HRwAAAAAOgAAAAAIAACAAAADTH1Gu42qfImSprfe/K1nL3+1hFqyCvzpE6ZLgS0aLf5AAAAA8Euz/hqaDwdyp8S/e3dF+tWN/rK5icacdn48UedNnWwKsBF1eAHgQKSCGopBjnRw5YFU2tZOQ/4syv2IqwALCiAODJRWkU1btD+Ygj0h7GVsWMSGR5Und9ctvN+TqdqeReFsG6RFgwsZX0bBi2JIm2hp5xw5atWZRhFUT+VtVSCr3iwj2d6w0J/0WyDMyAKlAAAAAmtw/4NTO6wAfxw5/p2WfIdSJRND+kQHAokAYC5XzI7yZsgh64kDABM6btm8hUlqcDSgJita9+akkMCKjst1yuQ==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -42,10 +42,10 @@
                 <SSIS:Property SSIS:Name="Name">Package</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">209</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">211</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{DD85FBF3-14A5-4B42-B30B-13823658C1ED}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{48C0A502-2213-45FC-A030-7B5933122A2F}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -62,7 +62,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">true</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">false</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -76,7 +76,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">D:\Egyetem\Üzleti intelligencia labor\Movie-performance\data\imdb_movies_2.csv</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">D:\Egyetem\Üzleti intelligencia labor\Movie-performance\data\imdb_movies_1.csv</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -106,7 +106,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">Data Source=(localdb)\mssqllocaldb;Initial Catalog=Movie;Integrated Security=True;Application Name=SSIS-Package-{57CF8D8A-07DE-4EE1-B81F-91735290D5B5}(localdb)\mssqllocaldb.Movie;</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">Data Source=KALOCSAADI-PC\SQLFULL;Initial Catalog=Movie;Integrated Security=True;Application Name=SSIS-Package-{57CF8D8A-07DE-4EE1-B81F-91735290D5B5}(localdb)\mssqllocaldb.Movie;</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -180,7 +180,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">(localdb)\mssqllocaldb</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">KALOCSAADI-PC\SQLFULL</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -224,7 +224,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">Data Source=(localdb)\mssqllocaldb;Initial Catalog=Movie;Provider=MSOLEDBSQL19.1;Integrated Security=SSPI;Application Name=SSIS-Package-{174B8BF8-250A-4E75-AA88-BA48B317E764}(localdb)\mssqllocaldb.Movie1;Auto Translate=False;</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">Data Source=KALOCSAADI-PC\SQLFULL;Initial Catalog=Movie;Provider=MSOLEDBSQL19.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{174B8BF8-250A-4E75-AA88-BA48B317E764}(localdb)\mssqllocaldb.Movie1;Trust Server Certificate=True;</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -328,7 +328,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">(localdb)\mssqllocaldb</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">KALOCSAADI-PC\SQLFULL</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
