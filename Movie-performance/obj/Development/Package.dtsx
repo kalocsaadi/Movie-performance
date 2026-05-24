@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="191"
-  DTS:VersionGUID="{540B0A95-3DD8-45B2-974C-E8C79DC59ED8}">
+  DTS:VersionBuild="209"
+  DTS:VersionGUID="{DD85FBF3-14A5-4B42-B30B-13823658C1ED}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -54,7 +54,7 @@
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x0022_"
           DTS:CodePage="65001"
-          DTS:ConnectionString="D:\Egyetem\Üzleti intelligencia labor\Movie-performance\data\imdb_movies.csv">
+          DTS:ConnectionString="D:\Egyetem\Üzleti intelligencia labor\Movie-performance\data\imdb_movies_2.csv">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -250,12 +250,21 @@
   <DTS:PackageParameters>
     <DTS:PackageParameter
       DTS:CreationName=""
+      DTS:DataType="11"
+      DTS:DTSID="{0F3CB89E-896E-4C99-9702-48DBBC8D4E8B}"
+      DTS:ObjectName="FullReload">
+      <DTS:Property
+        DTS:DataType="11"
+        DTS:Name="ParameterValue">-1</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
       DTS:DataType="8"
       DTS:DTSID="{E8CDCFC6-2845-486A-B7F6-F19B9207FD19}"
       DTS:ObjectName="MovieFilePath">
       <DTS:Property
         DTS:DataType="8"
-        DTS:Name="ParameterValue">D:\Egyetem\Üzleti intelligencia labor\Movie-performance\data\imdb_movies.csv</DTS:Property>
+        DTS:Name="ParameterValue">D:\Egyetem\Üzleti intelligencia labor\Movie-performance\data\imdb_movies_2.csv</DTS:Property>
     </DTS:PackageParameter>
   </DTS:PackageParameters>
   <DTS:Variables />
@@ -7548,13 +7557,13 @@ CROSS APPLY STRING_SPLIT(Genre, ',')</property>
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Expression"
-                          name="Expression">(![ISNULL](#{Package\Create stage data tables from raw\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Budget_Bigint]}) &amp;&amp; ![ISNULL](#{Package\Create stage data tables from raw\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Revenue_Bigint]}) &amp;&amp; #{Package\Create stage data tables from raw\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Budget_Bigint]} != 0) ? (((DT_DECIMAL,2)(#{Package\Create stage data tables from raw\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Revenue_Bigint]} - #{Package\Create stage data tables from raw\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Budget_Bigint]})) / (DT_DECIMAL,2)#{Package\Create stage data tables from raw\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Budget_Bigint]}) * 100 : 0</property>
+                          name="Expression">(![ISNULL](#{Package\Create stage data tables from raw\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Budget_Bigint]}) &amp;&amp; ![ISNULL](#{Package\Create stage data tables from raw\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Revenue_Bigint]}) &amp;&amp; #{Package\Create stage data tables from raw\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Budget_Bigint]} != 0) ? (((((DT_DECIMAL,2)(#{Package\Create stage data tables from raw\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Revenue_Bigint]} - #{Package\Create stage data tables from raw\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Budget_Bigint]})) / (DT_DECIMAL,2)#{Package\Create stage data tables from raw\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Budget_Bigint]}) * 100) &gt; 2000 ? 2000 : ((((DT_DECIMAL,2)(#{Package\Create stage data tables from raw\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Revenue_Bigint]} - #{Package\Create stage data tables from raw\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Budget_Bigint]})) / (DT_DECIMAL,2)#{Package\Create stage data tables from raw\Convert budget and revenue values to int.Outputs[Data Conversion Output].Columns[Budget_Bigint]}) * 100)) : 0</property>
                         <property
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Friendly Expression"
                           expressionType="Notify"
-                          name="FriendlyExpression">(!ISNULL(Budget_Bigint) &amp;&amp; !ISNULL(Revenue_Bigint) &amp;&amp; Budget_Bigint != 0) ? (((DT_DECIMAL,2)(Revenue_Bigint - Budget_Bigint)) / (DT_DECIMAL,2)Budget_Bigint) * 100 : 0</property>
+                          name="FriendlyExpression">(!ISNULL(Budget_Bigint) &amp;&amp; !ISNULL(Revenue_Bigint) &amp;&amp; Budget_Bigint != 0) ? (((((DT_DECIMAL,2)(Revenue_Bigint - Budget_Bigint)) / (DT_DECIMAL,2)Budget_Bigint) * 100) &gt; 2000 ? 2000 : ((((DT_DECIMAL,2)(Revenue_Bigint - Budget_Bigint)) / (DT_DECIMAL,2)Budget_Bigint) * 100)) : 0</property>
                       </properties>
                     </outputColumn>
                   </outputColumns>
@@ -10930,6 +10939,8 @@ CROSS APPLY STRING_SPLIT(Genre, ',')</property>
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="0">
       <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="Disable">@[$Package::FullReload] == false</DTS:PropertyExpression>
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{57CF8D8A-07DE-4EE1-B81F-91735290D5B5}"
@@ -11991,25 +12002,25 @@ CROSS APPLY STRING_SPLIT(Genre, ',')</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="123,42"
-          Id="Package\Create dimension tables\Multicast"
-          TopLeft="578,124" />
-        <NodeLayout
-          Size="197,42"
-          Id="Package\Create dimension tables\Read from MoviesStage"
-          TopLeft="539,46" />
-        <NodeLayout
           Size="233,42"
           Id="Package\Create dimension tables\Create Country dimension table"
           TopLeft="671,325" />
+        <NodeLayout
+          Size="230,42"
+          Id="Package\Create dimension tables\Split genres into seperate rows"
+          TopLeft="984,55" />
         <NodeLayout
           Size="226,42"
           Id="Package\Create dimension tables\Create Genre dimension table"
           TopLeft="988,325" />
         <NodeLayout
-          Size="230,42"
-          Id="Package\Create dimension tables\Split genres into seperate rows"
-          TopLeft="984,55" />
+          Size="197,42"
+          Id="Package\Create dimension tables\Read from MoviesStage"
+          TopLeft="539,46" />
+        <NodeLayout
+          Size="123,42"
+          Id="Package\Create dimension tables\Multicast"
+          TopLeft="578,124" />
         <NodeLayout
           Size="224,42"
           Id="Package\Create dimension tables\Create Movie dimension table"
@@ -12026,50 +12037,6 @@ CROSS APPLY STRING_SPLIT(Genre, ',')</property>
           Size="175,42"
           Id="Package\Create dimension tables\Clean genre names"
           TopLeft="1010,136" />
-        <EdgeLayout
-          Id="Package\Create dimension tables.Paths[ADO NET Source Output1]"
-          TopLeft="1098.25,97">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,39"
-              Start="0,0"
-              End="0,31.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,31.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Create dimension tables.Paths[ADO NET Source Output]"
-          TopLeft="638.5,88">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,36"
-              Start="0,0"
-              End="0,28.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,28.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <EdgeLayout
           Id="Package\Create dimension tables.Paths[Multicast Output 2]"
           TopLeft="658.666666666667,166">
@@ -12196,6 +12163,50 @@ CROSS APPLY STRING_SPLIT(Genre, ',')</property>
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,39.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Create dimension tables.Paths[ADO NET Source Output1]"
+          TopLeft="1098.25,97">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39"
+              Start="0,0"
+              End="0,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Create dimension tables.Paths[ADO NET Source Output]"
+          TopLeft="638.5,88">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36"
+              Start="0,0"
+              End="0,28.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
